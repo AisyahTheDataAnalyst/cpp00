@@ -6,7 +6,7 @@
 /*   By: aimokhta <aimokhta@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 16:50:01 by aimokhta          #+#    #+#             */
-/*   Updated: 2025/08/24 21:31:28 by aimokhta         ###   ########.fr       */
+/*   Updated: 2025/08/24 21:34:55 by aimokhta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,6 @@ bool PhoneBook::is_it_digit_only(std::string pn)
     return (true);
 }
 
-std::string PhoneBook::formatting(std::string str) // already declare static at header, no need 
-{
-    if (str.length() > 10)
-        return (str.substr(0, 9) + ".");
-    else
-        return (std::string(10 - str.length(), ' ') + str);
-}
-
 void PhoneBook::search_command()
 {
     int index;
@@ -102,4 +94,12 @@ void PhoneBook::search_command()
     }
     else
         std::cerr << RED << "Invalid index" << RESET << "\n" << std::endl;
+}
+
+std::string PhoneBook::formatting(std::string str) // already declare static at header, no need 
+{
+    if (str.length() > 10)
+        return (str.substr(0, 9) + ".");
+    else
+        return (std::string(10 - str.length(), ' ') + str);
 }
