@@ -6,7 +6,7 @@
 /*   By: aimokhta <aimokhta@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 16:50:01 by aimokhta          #+#    #+#             */
-/*   Updated: 2025/08/24 21:34:55 by aimokhta         ###   ########.fr       */
+/*   Updated: 2025/08/24 21:49:54 by aimokhta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,13 @@ void PhoneBook::add_command()
     std::cout << "Nickname: ";
     std::getline(std::cin, nn);
     std::cout << "PhoneNumber (without spaces and digits only): ";
-    std::cin >> pn;
+    std::getline(std::cin, pn);
     if (is_it_digit_only(pn) == false)
     {
         std::cerr << RED << "Phone number is not in digits\n" << RESET << std::endl;
         return ;
     }
     std::cout << "DarkestSecret: ";
-    std::cin.ignore(1000, '\n');    // discard leftover \n from previous >> 
     std::getline(std::cin, secret); 
 
     if (fn.empty() || ln.empty() || nn.empty() || pn.empty() || secret.empty()) //.empty() returns true if string length is 0, can also use .length() or .size()
@@ -57,9 +56,9 @@ void PhoneBook::add_command()
 }
 bool PhoneBook::is_it_digit_only(std::string pn)
 {
-    for(int i = 0; pn[i] != '\0'; i++)
+    for(std::size_t i = 0; i < pn.size(); i++)
     {
-        if (!isdigit(pn[i]))
+        if (!std::isdigit((static_cast<unsigned char>(pn[i]))))
             return (false);
     }
     return (true);
