@@ -6,7 +6,7 @@
 /*   By: aimokhta <aimokhta@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 07:23:05 by aimokhta          #+#    #+#             */
-/*   Updated: 2025/08/24 16:00:14 by aimokhta         ###   ########.fr       */
+/*   Updated: 2025/08/24 16:53:18 by aimokhta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int main()
         else if (cmd == "EXIT")
             break ;
         else
-            std::cout << RED << "Invalid command\n" << RESET << std::endl;
+            std::cerr << RED << "Invalid command\n" << RESET;
     }
     return (0);
 }

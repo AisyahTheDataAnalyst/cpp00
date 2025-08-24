@@ -6,7 +6,7 @@
 #    By: aimokhta <aimokhta@student.42kl.edu.my>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/23 18:50:01 by aimokhta          #+#    #+#              #
-#    Updated: 2025/08/24 16:19:44 by aimokhta         ###   ########.fr        #
+#    Updated: 2025/08/24 16:53:18 by aimokhta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,9 @@ CFLAG = -Wall -Werror -Wextra -std=c++98 -g -O0
 # valgrind --leak-check=full --show-leak-kinds=all
 # -g = gives error messages for debugging, needed by gdb / valgrind / helgrind
 
-SRC =	main.cpp
+SRC =	\
+		main.cpp \
+		phonebook.cpp
 
 OBJ_FOLDER = obj_files
 

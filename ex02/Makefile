@@ -6,11 +6,11 @@
 #    By: aimokhta <aimokhta@student.42kl.edu.my>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/23 18:50:01 by aimokhta          #+#    #+#              #
-#    Updated: 2025/08/23 22:39:19 by aimokhta         ###   ########.fr        #
+#    Updated: 2025/08/24 16:22:55 by aimokhta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = megaphone
+NAME = account
 
 CC = c++
 
@@ -25,16 +25,12 @@ CFLAG = -Wall -Werror -Wextra -std=c++98 -g -O0
 
 SRC =	Account.cpp \
 		tests.cpp
-	
-# INC = -I include
-# this is what is caused to not write explicit path for all #includes in all header and c files
-# -I means it will search the header in that directory that is mentioned in the each file's #include
 
 OBJ_FOLDER = obj_files
 
 # patsubst : pattern substitution function
 # create a list of .o files in the object folder
-OBJ_SRC = $(patsubst %.c, $(OBJ_FOLDER)/%.o, $(SRC))
+OBJ_SRC = $(patsubst %.cpp, $(OBJ_FOLDER)/%.o, $(SRC))
 
 # color
 GREEN = \033[0;32m
@@ -44,16 +40,15 @@ RESET = \033[0m  	#white
 all: $(NAME)
 
 $(NAME) : $(OBJ_SRC)
-	$(CC) $(CFLAG) $(INC) $(OBJ_SRC) -o $(NAME)
+	$(CC) $(CFLAG) $(OBJ_SRC) -o $(NAME)
 	@echo "${GREEN}----------COMPILED DONE----------\n${RESET}"
 
-$(OBJ_FOLDER)/%.o : %.c
+$(OBJ_FOLDER)/%.o : %.cpp
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAG) $(INC) -c $< -o $@
-# add $(INC) to not do explicit path to all #include of all header and c files
+	$(CC) $(CFLAG) -c $< -o $@
 
 clean:
-	@rm -rf $(OBJ_FOLDER)
+	rm -rf $(OBJ_FOLDER)
 	@echo "${GREEN}----------CLEANED----------\n${RESET}"
 
 fclean : clean

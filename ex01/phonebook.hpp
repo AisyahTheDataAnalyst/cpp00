@@ -6,7 +6,7 @@
 /*   By: aimokhta <aimokhta@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 22:40:43 by aimokhta          #+#    #+#             */
-/*   Updated: 2025/08/24 16:04:53 by aimokhta         ###   ########.fr       */
+/*   Updated: 2025/08/24 19:45:33 by aimokhta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,39 @@
 
 class Contact
 {
-    public:
-		int			Index;
-        std::string FirstName;
-        std::string LastName;
-        std::string Nickname;
-        std::string PhoneNumber;
-        std::string DarkestSecret;
+private:
+    int			Index;
+    std::string FirstName;
+    std::string LastName;
+    std::string Nickname;
+    std::string PhoneNumber;
+    std::string DarkestSecret;
+    
+public:
+    //setters or recorders into the class
+    void setIndex(int i) { Index = i; }
+    void setFirstName(const std::string &fn) { FirstName = fn; } // & take the original string instead of the copy of it, useful if its a long string
+    void setLastName(const std::string &ln) { LastName = ln; }   // const here refers to the parameter
+    void setNickname(const std::string &nn) { Nickname = nn; }
+    void setPhoneNumber(const std::string &pn) {PhoneNumber = pn; }
+    void setDarkestSecret(const std::string &secret) {DarkestSecret = secret; }
+
+    //getters or readers only from the class
+    int         getIndex() const { return Index; } // const refers to the members/object of the class
+    std::string getFirstName() const { return FirstName; }
+    std::string getLastName() const { return LastName; }
+    std::string getNickname() const { return Nickname; }
+    std::string getPhoneNumber() const { return PhoneNumber; }
+    std::string getDarkestSecret() const { return DarkestSecret; }
 };
 
 class PhoneBook 
 {
-    public: 
+    private: 
         Contact contacts[MAX_CONTACTS];
 		int 	contact_count;
 
+    public:
 		PhoneBook() 
 		{
 			contact_count = 0;
@@ -50,79 +68,9 @@ class PhoneBook
 		// PhoneBook() : contact_count(0) {} 
 		// meaning = constructor (PhoneBook()) | with an initializer list (: contact_count(0)) | {} = empty body, done nothing else than the initialization
 
-        void add_command()
-        {
-			std::string fn, ln, nn, pn, secret;
-
-			std::cout << "FirstName: ";
-            std::cin >> fn;
-            std::cout << "LastName: ";
-            std::cin >> ln;
-            std::cout << "Nickname: ";
-            std::cin >> nn;
-            std::cout << "PhoneNumber: ";
-            std::cin >> pn;
-            std::cout << "DarkestSecret: ";
-			std::cin.ignore();
-            std::getline(std::cin, secret); // to include spaces
-
-            if (fn.empty() || ln.empty() || nn.empty() || pn.empty() || secret.empty()) //.empty() returns true if string length is 0, can also use .length() or .size()
-			{
-				std::cout << "Contact's detail must not be empty" << std::endl;
-				return ;
-			}
-			else
-			{
-				int i = contact_count % MAX_CONTACTS;
-				contacts[i].Index = i + 1;
-				contacts[i].FirstName = fn;
-				contacts[i].LastName = ln;
-				contacts[i].Nickname = nn;
-				contacts[i].PhoneNumber = pn;
-				contacts[i].DarkestSecret = secret;
-				contact_count++;
-				std::cout << CYAN << "Contact's details saved!\n" << RESET << std::endl;
-				return ;
-			}
-        }
-
-        std::string formatting(std::string str)
-        {
-            if (str.length() > 10)
-                return (str.substr(0, 9) + ".");
-            else
-				return (std::string(10 - str.length(), ' ') + str);
-        }
-
-        void search_command()
-        {
-			int index;
-
-            std::cout   << std::setw(10) << "Index" << "|"
-                        << std::setw(10) << "FirstName" << "|"
-                        << std::setw(10) << "LastName" << "|"
-                        << std::setw(10) << "Nickname" << "\n";
-            for (int i = 0; i < MAX_CONTACTS && i < contact_count; i++)
-            {
-                std::cout   << std::setw(10) << contacts[i].Index << "|"
-                            << formatting(contacts[i].FirstName) << "|"
-                            << formatting(contacts[i].LastName) << "|"
-                            << formatting(contacts[i].Nickname) << std::endl;
-            }
-
-            std::cout	<< BLUE << "\nIndex of the contact you are searching for: " << RESET;
-			std::cin	>> index;
-			
-            if (index > 0 && index <= MAX_CONTACTS && index <= contact_count)
-            {
-                std::cout   << "FirstName: " << contacts[index - 1].FirstName << "\n"
-                            << "LastName: " << contacts[index - 1].LastName << "\n"
-                            << "Nickname: " << contacts[index - 1].Nickname << "\n" 
-							<< "PhoneNumber: " << contacts[index - 1].PhoneNumber << "\n" << std::endl;
-            }
-            else
-                std::cout << RED << "Invalid index\n" << RESET << std::endl;
-        }
+        void add_command();
+        void search_command();
+        static std::string formatting(std::string str); // static nly mention ONCE in class declaration only
 };
 
 #endif
