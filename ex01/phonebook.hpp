@@ -6,7 +6,7 @@
 /*   By: aimokhta <aimokhta@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 22:40:43 by aimokhta          #+#    #+#             */
-/*   Updated: 2025/08/24 19:51:20 by aimokhta         ###   ########.fr       */
+/*   Updated: 2025/08/24 21:27:32 by aimokhta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <iostream> //std::cin, std::cout , std::endl
 # include <string> //std:string, std::getline
 # include <iomanip> //std::setw
+# include <cctype> //isdigit
 
 class Contact
 {
@@ -71,6 +72,7 @@ class PhoneBook
         void add_command();
         void search_command();
         static std::string formatting(std::string str); // static nly mention ONCE in class declaration only
+        static bool is_it_digit_only(std::string pn);
 };
 
 #endif

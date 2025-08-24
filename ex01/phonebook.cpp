@@ -6,7 +6,7 @@
 /*   By: aimokhta <aimokhta@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 16:50:01 by aimokhta          #+#    #+#             */
-/*   Updated: 2025/08/24 21:03:48 by aimokhta         ###   ########.fr       */
+/*   Updated: 2025/08/24 21:31:28 by aimokhta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ void PhoneBook::add_command()
     std::getline(std::cin, nn);
     std::cout << "PhoneNumber (without spaces and digits only): ";
     std::cin >> pn;
+    if (is_it_digit_only(pn) == false)
+    {
+        std::cerr << RED << "Phone number is not in digits\n" << RESET << std::endl;
+        return ;
+    }
     std::cout << "DarkestSecret: ";
     std::cin.ignore(1000, '\n');    // discard leftover \n from previous >> 
     std::getline(std::cin, secret); 
@@ -49,6 +54,15 @@ void PhoneBook::add_command()
         std::cout << CYAN << "Contact's details saved!\n" << RESET << std::endl;
         return ;
     }
+}
+bool PhoneBook::is_it_digit_only(std::string pn)
+{
+    for(int i = 0; pn[i] != '\0'; i++)
+    {
+        if (!isdigit(pn[i]))
+            return (false);
+    }
+    return (true);
 }
 
 std::string PhoneBook::formatting(std::string str) // already declare static at header, no need 
