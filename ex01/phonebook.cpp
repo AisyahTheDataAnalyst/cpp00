@@ -6,31 +6,34 @@
 /*   By: aimokhta <aimokhta@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 16:50:01 by aimokhta          #+#    #+#             */
-/*   Updated: 2025/08/24 19:45:33 by aimokhta         ###   ########.fr       */
+/*   Updated: 2025/08/24 21:03:48 by aimokhta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "phonebook.hpp"
 
+// std::cout uses << named insertion operator (insert data into the stream)
+// std::cin uses >> named extraction operator (take data out of stream(keyboard))
 void PhoneBook::add_command()
 {
     std::string fn, ln, nn, pn, secret;
 
     std::cout << "FirstName: ";
-    std::cin >> fn;
+    std::cin.ignore(1000, '\n');  // This means: ignore up to 1000 characters, or stop when a newline \n is found.  
+    std::getline(std::cin, fn);   // getline include spaces
     std::cout << "LastName: ";
-    std::cin >> ln;
+    std::getline(std::cin, ln);
     std::cout << "Nickname: ";
-    std::cin >> nn;
-    std::cout << "PhoneNumber: ";
+    std::getline(std::cin, nn);
+    std::cout << "PhoneNumber (without spaces and digits only): ";
     std::cin >> pn;
     std::cout << "DarkestSecret: ";
-    std::cin.ignore();
-    std::getline(std::cin, secret); // to include spaces
+    std::cin.ignore(1000, '\n');    // discard leftover \n from previous >> 
+    std::getline(std::cin, secret); 
 
     if (fn.empty() || ln.empty() || nn.empty() || pn.empty() || secret.empty()) //.empty() returns true if string length is 0, can also use .length() or .size()
     {
-        std::cout << "Contact's detail must not be empty" << std::endl;
+        std::cerr << RED << "Contact's detail must not be empty\n" << RESET << std::endl;
         return ;
     }
     else
@@ -84,5 +87,5 @@ void PhoneBook::search_command()
                     << "DarkestSecret: " << contacts[index - 1].getDarkestSecret() << "\n" << std::endl;
     }
     else
-        std::cerr << RED << "Invalid index\n" << RESET;
+        std::cerr << RED << "Invalid index" << RESET << "\n" << std::endl;
 }

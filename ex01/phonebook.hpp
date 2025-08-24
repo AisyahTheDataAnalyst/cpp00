@@ -6,7 +6,7 @@
 /*   By: aimokhta <aimokhta@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 22:40:43 by aimokhta          #+#    #+#             */
-/*   Updated: 2025/08/24 19:45:33 by aimokhta         ###   ########.fr       */
+/*   Updated: 2025/08/24 19:51:20 by aimokhta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # define GREEN_BG	"\033[42m"
 
 # include <iostream> //std::cin, std::cout , std::endl
-# include <string> //std:string
+# include <string> //std:string, std::getline
 # include <iomanip> //std::setw
 
 class Contact
