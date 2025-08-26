@@ -13,7 +13,7 @@
 #ifndef PHONEBOOK_HPP
 # define PHONEBOOK_HPP
 
-# define MAX_CONTACTS 3
+# define MAX_CONTACTS 8
 # define RESET   	"\033[0m"
 # define WHITE  	"\033[1;37m"
 # define RED		"\033[1;31m"

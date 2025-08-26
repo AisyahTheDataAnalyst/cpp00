@@ -20,10 +20,8 @@ CFLAG = -Wall -Werror -Wextra -std=c++98 -g -O0
 # valgrind --leak-check=full --show-leak-kinds=all
 # -g = gives error messages for debugging, needed by gdb / valgrind / helgrind
 
-# directory that contains source files
-# SRC_DIR = src
-
-SRC =	Account.cpp \
+SRC =	\
+		Account.cpp \
 		tests.cpp
 
 OBJ_FOLDER = obj_files
