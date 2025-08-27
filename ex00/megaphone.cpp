@@ -87,6 +87,12 @@ Redirected to a file (fully buffered)
 std::endl → flushed immediately, so appears in file right away.
 👉 Difference is visible here.
 
+So this:
+    std::cout << "Hello" << std::endl;
+is equivalent to:
+    std::cout << "Hello\n";
+    std::cout.flush();
+
 ✅ Summary:
 - Buffer = waiting area for output.
 - \n = newline (may flush if line-buffered).

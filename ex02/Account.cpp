@@ -11,37 +11,35 @@
 /* ************************************************************************** */
 
 #include "Account.hpp"
-#include <iostream> // std::cout
-#include <ctime> // std::time_t(), std::localtime()
-#include <iomanip> //std::setw(), std::setfill()
+#include <iostream> // std::cout, std::endl
+#include <ctime> // std::time_t, std::time_t(), std::localtime(), std::strftime()
 
 // static private variables initializer (shared among all objects)
-
 int Account::_nbAccounts = 0;
 int Account::_totalAmount = 0;
 int Account::_totalNbDeposits = 0;
 int Account::_totalNbWithdrawals = 0;
 
 // a utility function used within the class only (static private function member)
-
 void Account::_displayTimestamp(void)
 {
-    std::time_t now = std::time(NULL);
-    std::tm *ltm = std::localtime(&now);
-
-    std::cout   << "[" 
-                << 1900 + ltm->tm_year
-                << std::setfill('0') << std::setw(2) << 1 + ltm->tm_mon
-                << std::setfill('0') << std::setw(2) << ltm->tm_mday
-                << "_"
-                << std::setfill('0') << std::setw(2) << ltm->tm_hour
-                << std::setfill('0') << std::setw(2) << ltm->tm_min
-                << std::setfill('0') << std::setw(2) << ltm->tm_sec
-                << "] ";
+    char timestamp[20]; 
+    std::time_t now; // gives raw seconds since 00:00:00 UTC JAN 1 1970 (UNIX epoch), std::time_t ~~ long long
+	
+	std::time(&now); // = "get current time now"
+    std::strftime(timestamp, sizeof(timestamp), "%Y%m%d_%H%M%S", std::localtime(&now));
+	std::cout << "[" << timestamp << "] ";
+    // time() gives you a raw "seconds since 1970" counter.
+    // localtime() unpacks that into year/month/day/hour/minute/second fields.
+    // strftime() turns those fields into a nice formatted string.
+    //
+    // prototype: std::tm* std::localtime(const std::time_t* timer);
+    // std::strftime = string format time = (char *s, size_t maxsize, const char *format, const struck tm *timeptr)
+    // std:strftime() - Writes the formatted timestamp into timestamp (your char[20]), auto adds '\0' at the end = a valid C-string
+    // %Y - Year (2025), %m - month (01-12), %d - day(01-31), %H - housr(00-23), %M- minute(00-59), %S- second(00-59)
 }
 
 // constructor
-
 Account::Account(int initial_deposit)
 {
     // init non-static private variables - for each objects
@@ -111,25 +109,30 @@ void Account::makeDeposit( int deposit )
 
 bool Account::makeWithdrawal(int withdrawal)
 {
-    _displayTimestamp();
-    std::cout   << "index:" << this->_accountIndex << ";"
-                << "p_amount:" << this->_amount << ";";
-
     if ( checkAmount() < withdrawal)
     {
-        std::cout   << "withdrawal:refused" << std::endl;
+        _displayTimestamp();
+        std::cout   << "index:" << this->_accountIndex << ";"
+                    << "p_amount:" << this->_amount << ";"
+                    << "withdrawal:refused" << std::endl;
         return (false);
     }
 
-    this->_amount -= withdrawal;
-    this->_nbWithdrawals++;
-    _totalAmount -= withdrawal;
-    _totalNbWithdrawals++;
+    else
+    {
+        this->_amount -= withdrawal;
+        this->_nbWithdrawals++;
+        _totalAmount -= withdrawal;
+        _totalNbWithdrawals++;
 
-    std::cout   << "withdrawal:" << withdrawal << ";"
-                << "amount:" << this->_amount << ";"
-                << "nb_withdrawals:" << this->_nbWithdrawals << std::endl;
-    return (true);
+        _displayTimestamp();
+        std::cout   << "index:" << this->_accountIndex << ";"
+                    << "p_amount:" << this->_amount << ";"
+                    << "withdrawal:" << withdrawal << ";"
+                    << "amount:" << this->_amount << ";"
+                    << "nb_withdrawals:" << this->_nbWithdrawals << std::endl;
+        return (true);
+    }
 }
 
 int Account::checkAmount(void) const
