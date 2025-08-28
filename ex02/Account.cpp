@@ -87,7 +87,7 @@ void Account::displayAccountsInfos( void )
                 << "total:" << _totalAmount << ";"
                 << "deposits:" << _totalNbDeposits << ";"
                 << "withdrawals:" << _totalNbWithdrawals << std::endl;
-}
+} // we can directly put the static private variables directly without the getters because both the variables and the function are from the same class
 
 // setters (public function)
 

@@ -75,7 +75,7 @@ std::cout << "\n";      // newline flushes → "Hello\n" appears
 sleep(2);
 std::cerr << "Error!\n"; // unbuffered → appears instantly
 
-🔹 What happens when you run it
+🔹 What happens when you run it (terminal vs file)
 
 In a terminal (line-buffered)
 "text\n" → shows immediately (newline triggers flush).

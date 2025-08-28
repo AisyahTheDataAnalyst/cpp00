@@ -1,16 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   phonebook.cpp                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: aimokhta <aimokhta@student.42kl.edu.my>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/24 16:50:01 by aimokhta          #+#    #+#             */
-/*   Updated: 2025/08/24 21:49:54 by aimokhta         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+/*insert 42 header*/
 
-#include "phonebook.hpp"
+#include "PhoneBook.hpp"
 
 // std::cout uses << named insertion operator (insert data into the stream)
 // std::cin uses >> named extraction operator (take data out of stream(keyboard))
@@ -19,7 +9,7 @@ void PhoneBook::add_command()
     std::string fn, ln, nn, pn, secret;
 
     std::cout << "FirstName: ";
-    std::cin.ignore(1000, '\n');  // This means: ignore up to 1000 characters, or stop when a newline \n is found.  
+    std::cin.ignore(1000, '\n');  // This means: ignore up to 1000 characters, or stop when it finds the first newline \n. (from previous '\n' from >> from std::cin that leaves \n sitting in the buffer which will make gives u empty string without waiting for getline's real input) 
     std::getline(std::cin, fn);   // getline include spaces
     std::cout << "LastName: ";
     std::getline(std::cin, ln);
@@ -58,7 +48,7 @@ bool PhoneBook::is_it_digit_only(std::string pn)
 {
     for(std::size_t i = 0; i < pn.size(); i++)
     {
-        if (!std::isdigit((static_cast<unsigned char>(pn[i]))))
+        if (!std::isdigit((static_cast<unsigned char>(pn[i])))) // if not a digit, isdigit returns 0
             return (false);
     }
     return (true);
@@ -95,10 +85,10 @@ void PhoneBook::search_command()
         std::cerr << RED << "Invalid index" << RESET << "\n" << std::endl;
 }
 
-std::string PhoneBook::formatting(std::string str) // already declare static at header, no need 
+std::string PhoneBook::formatting(std::string str)
 {
     if (str.length() > 10)
-        return (str.substr(0, 9) + ".");
+        return (str.substr(0, 9) + "."); // + operator means concatenate
     else
-        return (std::string(10 - str.length(), ' ') + str);
+        return (std::string(10 - str.length(), ' ') + str); // std::string has a constructor - string(size_t n, char c);
 }

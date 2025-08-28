@@ -52,7 +52,7 @@ private:
 	int				_nbDeposits;
 	int				_nbWithdrawals;
 
-	Account( void );
+	Account( void ); // private constructor - didnt use it - its to act as a guard so you didnt create an object without the initial deposit value : ex: Account a; (invalid), Account a(100); (valid) , no neeed to code this coz we'll never call this fn
 };
 
 

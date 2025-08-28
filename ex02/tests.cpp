@@ -10,37 +10,37 @@
 #include <vector>
 #include <algorithm> // for_each
 #include <functional> // mem_fun_ref
-#include "Account.hpp"
+#include "Account.hpp" // Linux & macOS usually case-sensitive, so must Account.hpp not account.hpp. windows are case-insensitive. depends on what you named your .hpp
 
 
 int		main( void ) {
 																		  // renaming Account -> t -> accounts_t  
-	typedef std::vector<Account::t>							  accounts_t; // std::vector<T> : a dynamic array( a list can grow/shrink ) 
+	typedef std::vector<Account::t>							  accounts_t; // std::vector<T> : a dynamic array( a list can grow/shrink )
 	typedef std::vector<int>								  ints_t;     // < > : angle bracklets: tell compiler what type you want
-	typedef std::pair<accounts_t::iterator, ints_t::iterator> acc_int_t;  // std::pair<A<B> : just a small container holding 2 things together (not just iterators)
+	typedef std::pair<accounts_t::iterator, ints_t::iterator> acc_int_t;  // std::pair<A,B> : just a small container holding exectly 2 things together (not just iterators)
 																		  // iterator: a pointer to an element inside a vector/container
-																		  // ex of iterator : v.begin() returns iterator to the 1st element
-																		  //                : v>end() returns iterator past the last element (last + 1)
+																		  // example of iterator : v.begin() returns iterator to the 1st element
+																		  //                     : v.end() returns iterator past the last element (last + 1)
 	int	const				amounts[]	= { 42, 54, 957, 432, 1234, 0, 754, 16576 };
 	size_t const			amounts_size( sizeof(amounts) / sizeof(int) ); // equivalent to: size_t const amounts_size = sizeof(amounts) / sizeof(int); // () is just another syntax for initializing a variable. // sizeof(amounts) = total memory in bytes taken by the whole array, sizeof(int) = size of 1 int in bytes
-	accounts_t				accounts( amounts, amounts + amounts_size );   // accounts_t has a constructor that takes 2 iterators //amounts_size = declaring a variable with how many numbers in the amounts array, accounts also a variable
+	accounts_t				accounts( amounts, amounts + amounts_size );   // accounts_t has a constructor that takes 2 iterators //amounts_size = declaring a variable with how many numbers in the amounts array, accounts also an object
 	accounts_t::iterator	acc_begin	= accounts.begin();
 	accounts_t::iterator	acc_end		= accounts.end();
 
 	int	const			d[]			= { 5, 765, 564, 2, 87, 23, 9, 20 };
-	size_t const		d_size( sizeof(d) / sizeof(int) ); // d_size = variable
-	ints_t				deposits( d, d + d_size );         // deposits = variable
+	size_t const		d_size( sizeof(d) / sizeof(int) ); // d_size = init a variable
+	ints_t				deposits( d, d + d_size );         // deposits = building a vector from that range
 	ints_t::iterator	dep_begin	= deposits.begin();
 	ints_t::iterator	dep_end		= deposits.end();
 
 	int	const			w[]			= { 321, 34, 657, 4, 76, 275, 657, 7654 };
-	size_t const		w_size( sizeof(w) / sizeof(int) ); // w_size = variable
-	ints_t				withdrawals( w, w + w_size );      // withdrawals = variable
+	size_t const		w_size( sizeof(w) / sizeof(int) ); // w_size = init a variable
+	ints_t				withdrawals( w, w + w_size );      // withdrawals = building a vector from that range
 	ints_t::iterator	wit_begin	= withdrawals.begin();
 	ints_t::iterator	wit_end		= withdrawals.end();
 
 	Account::displayAccountsInfos();
-	std::for_each( acc_begin, acc_end, std::mem_fun_ref( &Account::displayStatus ) );//std::for_each(iterator first, iterator past the last, function) - an algorith in <algorithm> - loop over a range of elements and apply fn to each element
+	std::for_each( acc_begin, acc_end, std::mem_fun_ref( &Account::displayStatus ) );//std::for_each(iterator first, iterator past the last, function) - an algorithm in <algorithm> - loop over a range of elements and apply fn to each element
 																				     //std::mem_fun_ref = a fn that convert member function to function object("functor") 
 																					 //                 = a helper that enable us to call a member function
 																					 //                 = wraps a pointer to a member function into smthg can be used like a normal function object
@@ -61,7 +61,7 @@ int		main( void ) {
 
 		(*(it.first)).makeWithdrawal( *(it.second) ); // it.first → iterator to an Account, *it.first → the ACTUAL Account object by dereferencing it
 	}                                                 // it.second → iterator to an int, *it.second → the ACTUAL deposit/withdrawal amount
-													  // it = iterator/pointer, *it = REAL OBJECT
+													  // it = iterator/pointer, *it = REAL OBJECT . REMINDER, *(it.first) dosent replace void return type, its saying "who is calling the function?" -> Account. "which Account object should i call the function on?" -> it.second
 	Account::displayAccountsInfos();
 	std::for_each( acc_begin, acc_end, std::mem_fun_ref( &Account::displayStatus ) );
 
