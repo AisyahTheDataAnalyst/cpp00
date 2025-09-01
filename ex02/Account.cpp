@@ -6,7 +6,7 @@
 /*   By: aimokhta <aimokhta@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 16:31:29 by aimokhta          #+#    #+#             */
-/*   Updated: 2025/08/24 16:37:55 by aimokhta         ###   ########.fr       */
+/*   Updated: 2025/09/01 11:00:57 by aimokhta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void Account::_displayTimestamp(void)
     std::strftime(timestamp, sizeof(timestamp), "%Y%m%d_%H%M%S", std::localtime(&now));
 	std::cout << "[" << timestamp << "] ";
     // time() gives you a raw "seconds since 1970" counter.
-    // localtime() unpacks that into year/month/day/hour/minute/second fields.
+    // localtime() unpacks that into year/month/day/hour/minute/second fields IN MY TIMEZONE SPECIFICALLY.
     // strftime() turns those fields into a nice formatted string.
     //
     // prototype: std::tm* std::localtime(const std::time_t* timer);
@@ -124,10 +124,11 @@ bool Account::makeWithdrawal(int withdrawal)
         this->_nbWithdrawals++;
         _totalAmount -= withdrawal;
         _totalNbWithdrawals++;
+        int p_amount = this->_amount + withdrawal;
 
         _displayTimestamp();
         std::cout   << "index:" << this->_accountIndex << ";"
-                    << "p_amount:" << this->_amount << ";"
+                    << "p_amount:" << p_amount << ";"
                     << "withdrawal:" << withdrawal << ";"
                     << "amount:" << this->_amount << ";"
                     << "nb_withdrawals:" << this->_nbWithdrawals << std::endl;
@@ -155,6 +156,6 @@ Account::~Account(void)
 {
     _displayTimestamp();
     std::cout   << "index:" << this->_accountIndex << ";"
-                << "amount:" << this->_amount << ";"\
+                << "amount:" << this->_amount << ";"
                 << "closed" << std::endl;
 }

@@ -6,7 +6,7 @@
 /*   By: aimokhta <aimokhta@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 08:57:10 by aimokhta          #+#    #+#             */
-/*   Updated: 2025/09/01 08:57:14 by aimokhta         ###   ########.fr       */
+/*   Updated: 2025/09/01 10:46:23 by aimokhta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ bool PhoneBook::is_it_digit_only(std::string pn)
 {
     for(std::size_t i = 0; i < pn.size(); i++)
     {
-        if (!std::isdigit((static_cast<unsigned char>(pn[i])))) // if not a digit, isdigit returns 0
+        if (!std::isdigit((static_cast<unsigned char>(pn[i])))) // if not a digit, isdigit returns 0 // isdigit only works safely with positive numbers 0-255 or EOF // negative numbers modulus 256 (-1 become 255)
             return (false);
     }
     return (true);
