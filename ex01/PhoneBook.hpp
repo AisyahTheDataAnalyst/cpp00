@@ -6,7 +6,7 @@
 /*   By: aimokhta <aimokhta@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 08:57:18 by aimokhta          #+#    #+#             */
-/*   Updated: 2025/09/01 08:57:20 by aimokhta         ###   ########.fr       */
+/*   Updated: 2025/09/01 10:14:29 by aimokhta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <string> //std:string, std::getline
 # include <iomanip> //std::setw
 # include <cctype> //syd::isdigit
+# include "Contact.hpp"
 
 class PhoneBook 
 {
